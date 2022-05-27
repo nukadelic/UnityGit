@@ -5,6 +5,8 @@ using System.Linq;
 using UnityEditor;
 #endif
 
+using Nukadelic.Utils;
+
 [DisallowMultipleComponent]
 public class AlignChildrenFlat : MonoBehaviour
 {
