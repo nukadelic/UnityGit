@@ -34,14 +34,14 @@ public class QuickOverlayExample : MonoBehaviour
         void Update()
         {
             if( Selection.activeGameObject == null ) Show( false );
+            else if( Selection.activeGameObject == ( target?.gameObject ?? null ) ) Show( true );
             else if ( ! Selection.activeGameObject.TryGetComponent( out target ) ) Show( false );
             else Show( true );
         }
         void Show( bool b )
         {
             if( displayed == b ) return;
-            displayName = b ? "_" : YouHaveBeenWarned; // empty string will yield errors 
-            if ( floatingPosition.magnitude < 50 ) floatingPosition = new Vector2( 100, 100 );
+            displayName = b ? "_" : YouHaveBeenWarned;
             displayed = b;
         }
         #endregion
