@@ -11,11 +11,8 @@ public class QuickOverlayExample : MonoBehaviour
     // normal mono stuff here 
 
 #if UNITY_EDITOR
-
-    // editor will crash when seting visability directly in the context-menu inside the
-    // scene-view ( press space to show context menu popup ) 
-    [Overlay(typeof(SceneView) , YouHaveBeenWarned )]
-    class QuickOverlay : IMGUIOverlay
+    [Overlay(typeof(SceneView) , Title )]
+    class QuickOverlay : IMGUIOverlay , ITransientOverlay
     {
         QuickOverlayExample target; 
 
@@ -26,23 +23,18 @@ public class QuickOverlayExample : MonoBehaviour
             GUILayout.Label("YO");
         }
 
-        #region Fuckery
+        #region Transient Overlay
+        const string Title = "Skinned Mesh Vertex";
         public override void OnGUI() { BurnToScreen(); Update(); } 
         public override void OnCreated() { Selection.selectionChanged += Update; Update(); }
         public override void OnWillBeDestroyed() { Selection.selectionChanged -= Update; Update(); }
-        const string YouHaveBeenWarned = "Click to crash editor";
-        void Update()
-        {
-            if( Selection.activeGameObject == null ) Show( false );
-            else if( Selection.activeGameObject == ( target?.gameObject ?? null ) ) Show( true );
-            else if ( ! Selection.activeGameObject.TryGetComponent( out target ) ) Show( false );
-            else Show( true );
-        }
-        void Show( bool b )
-        {
-            if( displayed == b ) return;
-            displayName = b ? "_" : YouHaveBeenWarned;
-            displayed = b;
+        public bool visible => isVisible;
+        bool isVisible = false;
+        void Update() {
+            if( Selection.activeGameObject == null ) isVisible = ( false );
+            else if( Selection.activeGameObject == ( target?.gameObject ?? null ) ) isVisible = ( true );
+            else if ( ! Selection.activeGameObject.TryGetComponent( out target ) ) isVisible = ( false );
+            else isVisible = ( true );
         }
         #endregion
     }
