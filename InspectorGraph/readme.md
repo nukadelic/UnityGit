@@ -1,3 +1,7 @@
+[![image](   https://github.com/nukadelic/UnityGit/blob/main/~Doc/inspector-graph.png?raw=true   )]()
+
+
+
 ```cs
 using UnityEngine;
 
