@@ -1,7 +1,7 @@
 ```cs
 using UnityEngine;
 
-public class InspectorGraphExample : MonoBehaviour
+public class Example : MonoBehaviour
 {
     [Header("Func vars")]
 
