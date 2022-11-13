@@ -7,7 +7,7 @@ using System.Reflection;
 /**
  * Can't be used if the property is a member of another class 
  * 
- * use left mouse click to drag , scroll wheel to zoom 
+ * use left mouse click to drag , scroll wheel to zoom , right click to reset view
  * 
  */
 
